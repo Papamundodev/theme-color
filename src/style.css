@@ -3,6 +3,17 @@
   --heading-font: "Raleway",  sans-serif;
   --nav-font: "Poppins",  sans-serif;
   --color-scheme: light dark;
+  --accent-color-2: #fb5607;
+  --accent-color-3: #ff006e;
+  --accent-color-4: #8338ec;
+  --icon-size: 32px;
+  --box-shadow: 2px 2px 2px 0 var(--heading-color);
+}
+
+@media (max-width: 572px) {
+  :root {
+    --icon-size: 24px;
+  }
 }
 
 :root {
@@ -14,6 +25,7 @@
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
   --border-color: color-mix(in srgb, var(--background-color), black 10%); /* Border color for elements that require a border */
   --button-color: #ffffff;
+  --contrast-accent: color-mix(in srgb, var(--contrast-color), var(--accent-color) 40%);
 }
 
 .dark-theme {
@@ -23,6 +35,7 @@
   --surface-color: color-mix(in srgb, var(--background-color), var(--accent-color) 50%); 
   --contrast-color: #000000;
   --border-color: color-mix(in srgb, var(--background-color), white 10%); /* Border color for elements that require a border */
+  --contrast-accent: color-mix(in srgb, var(--contrast-color), var(--accent-color) 40%);
 }
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
@@ -31,8 +44,13 @@
 a {
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--accent-color);
+}
+
+p {
+  margin-top: 0;
 }
 
 body {
@@ -50,8 +68,8 @@ body {
 /* Styles pour les icônes de thème */
 .icon {
   fill: var(--accent-color);
-  width: 32px;
-  height: 32px;
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 /* Par défaut, cacher l'icône light */
@@ -94,6 +112,18 @@ h6 {
   margin: 0 auto;
 }
 
+@media (max-width: 1250px) {
+  .container {
+    padding: 0 3em;
+  }
+}
+
+@media (max-width: 572px) {
+  .container {
+    padding: 0 1em;
+  }
+}
+
 .button {
   border: none;
   padding: 10px 20px;
@@ -101,7 +131,7 @@ h6 {
   font-size: 1rem;
   background-color: var(--contrast-color);
   color: var(--heading-color);
-  box-shadow: 2px 2px 2px 0 var(--heading-color);
+  box-shadow: var(--box-shadow);
 }
 
 .button__primary {
@@ -119,7 +149,25 @@ h6 {
   background-color: var(--surface-color);
 }
 
+.bg-default {
+  background-color: var(--default-color);
+}
 
+.bg-contrast {
+  background-color: var(--contrast-color);
+}
+
+.bg-accent-2 {
+  background-color: var(--accent-color-2);
+}
+
+.bg-accent-3 {
+  background-color: var(--accent-color-3);
+}
+
+.bg-accent-4 {
+  background-color: var(--accent-color-4);
+}
 
 /*--------------------------------------------------------------
 # Header
@@ -130,17 +178,18 @@ header {
   height: 100%;
   align-self: start;
   border-bottom: .5px solid var(--border-color);
+  padding: 1em 0;
 }
 
 header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 1em;
 }
 
 header .logo {
   color: var(--heading-color);
+  font-size: 1.8rem;
 }
 
 header input {
@@ -152,7 +201,7 @@ header input {
 
 
 header input:focus-visible {
-  box-shadow: 0 0 0 2px var(--accent-color);
+  box-shadow: var(--box-shadow);
 }
 
 header input:hover {
@@ -162,22 +211,26 @@ header input:hover {
 
 header .nav ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
   min-width: 100px;
+  gap: 1em;
 }
 
 header .theme-toggle-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+
 }
 
 header .github-link {
-  width: 32px;
-  height: 32px;
+  width: var(--icon-size);
+  height: var(--icon-size);
   display: flex;
   align-items: center;
 }
@@ -189,10 +242,12 @@ header .github-link svg {
 }
 
 .section {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  padding: 2em 0;
+  padding: 3em 0;
   overflow: clip;
+}
+
+.section-heading {
+  margin-bottom: 1em;
 }
 
 .answer  {
@@ -205,9 +260,11 @@ header .github-link svg {
 
 .card-listing {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   justify-content: start;
   align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
 }
 
 .card {
@@ -216,9 +273,13 @@ header .github-link svg {
   flex-direction: column;
   gap: 10px;
   border-radius: 5px;
-  padding: 10px;
-  width: 300px;
-  height: 200px;
+  width: 280px;
+}
+
+@media (max-width: 572px) {
+  .card {
+    width: 100%;
+  }
 }
 
 .card-header {
@@ -234,15 +295,20 @@ header .github-link svg {
 }
 
 .card-heading, .ratio {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-.card-site-front,
-.card-site-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
+.card-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-container {
+  box-shadow: 1px 1px 1px 2px var(--heading-color);
   cursor: pointer;
   transition: transform 0.6s ease-in-out;
   display: flex;
@@ -250,7 +316,7 @@ header .github-link svg {
   align-items: center;
   font-weight: bold;
   flex-direction: column;
-  gap: 1.5em;
+  gap: 1.2em;
   padding: .5em;
 }
 
@@ -262,27 +328,18 @@ header .github-link svg {
   font-size: 1rem;
 }
 
-.card-site-front {
+.card-site-contrast {
   color: var(--contrast-color);
 }
 
-.card-site-back {
+.card-site-default {
   color: var(--default-color);
-  transform: rotateY(180deg);
 }
 
 .color-heading {
   color: var(--heading-color);
-  button {
-    color: var(--heading-color);
-  }
 }
 
-.card:hover .card-site-front {
-  transform: rotateY(180deg);
-
-}
-
-.card:hover .card-site-back {
-  transform: rotateY(360deg);
+.text-contrast-accent {
+  color: var(--contrast-accent);
 }

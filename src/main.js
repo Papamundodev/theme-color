@@ -115,11 +115,78 @@ observer.observe(document.body, {
     attributeFilter: ['class']
 });
 
-// Écouter les changements de couleur
+// Fonction pour convertir HEX en HSL
+function hexToHSL(hex) {
+    // Convertir hex en RGB
+    let r = parseInt(hex.slice(1,3), 16) / 255;
+    let g = parseInt(hex.slice(3,5), 16) / 255;
+    let b = parseInt(hex.slice(5,7), 16) / 255;
+
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if (max === min) {
+        h = s = 0; // achromatique
+    } else {
+        let d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+    };
+}
+
+// Fonction pour convertir HSL en HEX
+function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+// Fonction pour générer des couleurs similaires
+function generateSimilarColors(baseColor, count = 5) {
+    const hsl = hexToHSL(baseColor);
+    const colors = [];
+    
+    // Garder la même saturation et luminosité, changer la teinte
+    const hueStep = 360 / count;
+    
+    for (let i = 0; i < count; i++) {
+        let newHue = (hsl.h + (hueStep * (i + 5))) % 360;
+        colors.push(hslToHex(newHue, hsl.s, hsl.l));
+    }
+    
+    return colors;
+}
+
+// Utilisation
 document.getElementById('color-picker').addEventListener('change', function() {
-    // Mettre à jour la variable CSS
-    document.documentElement.style.setProperty('--accent-color', this.value);
-    // Recalculer tous les ratios
+    const baseColor = this.value;
+    const similarColors = generateSimilarColors(baseColor);
+    
+    // Mettre à jour la couleur principale
+    document.documentElement.style.setProperty('--accent-color', baseColor);
+    
+    // Mettre à jour les variables CSS pour les couleurs similaires
+    similarColors.forEach((color, index) => {
+        document.documentElement.style.setProperty(`--accent-color-${index + 1}`, color);
+    });
+    
     updateAllCalculations();
 });
 
