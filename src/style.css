@@ -328,18 +328,22 @@ header .github-link svg {
   font-size: 1rem;
 }
 
-.card-site-contrast {
-  color: var(--contrast-color);
-}
-
-.card-site-default {
-  color: var(--default-color);
-}
-
 .color-heading {
   color: var(--heading-color);
 }
 
-.text-contrast-accent {
+.color-contrast {
+  color: var(--contrast-color);
+}
+
+.color-default {
+  color: var(--default-color);
+}
+
+.color-accent {
+  color: var(--accent-color);
+}
+
+.color-contrast-accent {
   color: var(--contrast-accent);
 }
