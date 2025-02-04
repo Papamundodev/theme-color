@@ -14,7 +14,7 @@
   <body>
     <header>
       <div class="container">
-        <h1 class="logo">Theme Color</h1>
+        <div class="logo">Theme Color</div>
         <nav class="nav">
           <ul>
             <input type="color" id="color-picker" value="#473ae0">
@@ -43,11 +43,13 @@
           <p>Minimum (AA) : 4.5:1 pour le texte normal</p>
           <p>Amélioré (AAA) : 7:1 pour le texte normal</p>
           <p>Minimum (AA) : 3:1 pour les grands textes (18pt ou 14pt gras)</p>
+          <button class="button__primary button">Only keep card with a ratio of 4.5:1 or more</button>
         </div>
+
         <div class="card-listing">
           <!-- card -->
           <div class="card">
-            <div class="card-container element-ratio-calculating bg-main color-contrast">
+            <div class="card-front element-ratio-calculating bg-main color-contrast">
               <div class="card-header">
                 <div class="color-info">
                   <div class="bg-color-computed">Calculating...</div>  
@@ -58,44 +60,19 @@
               <h3 class="card-heading"><span>Background Main</span><span>Text Contrast</span></h3>
               <div class="ratio">Calculating...</div>  
             </div>
-          </div>
-          <!-- end card -->
-
-          <!-- card -->
-          <div class="card">
-            <div class="card-container element-ratio-calculating bg-surface color-contrast">
-              <div class="card-header">
-                <div class="color-info">
-                  <div class="bg-color-computed">Calculating...</div>  
-                  <div class="text-color-computed">Calculating...</div>  
-                </div>
-                <button class="button ">Button</button>
+            <article class="card-content bg-main color-contrast">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of main and a text color of contrast</p>
+                <button class="button">Button</button>
               </div>
-              <h3 class="card-heading"><span>Background Surface</span><span>Text contrast</span></h3>
-              <div class="ratio">Calculating...</div>  
-            </div>
+            </article>
           </div>
           <!-- end card -->
 
           <!-- card -->
           <div class="card">
-            <div class="card-container element-ratio-calculating color-heading bg-main">
-              <div class="card-header">
-                <div class="color-info">
-                  <div class="bg-color-computed">Calculating...</div>  
-                  <div class="text-color-computed">Calculating...</div>  
-                </div>
-              <button class="button ">Button</button>
-            </div>
-              <h3 class="card-heading"><span>Background Main</span><span>Text heading</span></h3>
-              <div class="ratio">Calculating...</div>  
-            </div>
-          </div>
-          <!-- end card -->
-
-          <!-- card -->
-          <div class="card">
-            <div class="card-container element-ratio-calculating bg-main">  
+            <div class="card-front element-ratio-calculating bg-main">  
               <div class="card-header">
                 <div class="color-info">
                   <div class="bg-color-computed">Calculating...</div>  
@@ -106,12 +83,65 @@
               <h3 class="card-heading"><span>Background Main</span><span>Text default</span></h3>
               <div class="ratio">Calculating...</div>  
             </div>
+            <article class="card-content bg-main color-default">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of main and a text color of default</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
           </div>
           <!-- end card -->
 
           <!-- card -->
           <div class="card">
-            <div class="card-container element-ratio-calculating bg-surface">  
+            <div class="card-front element-ratio-calculating color-heading bg-main">
+              <div class="card-header">
+                <div class="color-info">
+                  <div class="bg-color-computed">Calculating...</div>  
+                  <div class="text-color-computed">Calculating...</div>  
+                </div>
+              <button class="button ">Button</button>
+              </div>
+              <h3 class="card-heading"><span>Background Main</span><span>Text heading</span></h3>
+              <div class="ratio">Calculating...</div>  
+            </div>
+            <article class="card-content bg-main color-heading">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of main and a text color of heading</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
+          </div>
+          <!-- end card -->
+
+          <!-- card -->
+          <div class="card">
+            <div class="card-front element-ratio-calculating bg-surface color-contrast">
+              <div class="card-header">
+                <div class="color-info">
+                  <div class="bg-color-computed">Calculating...</div>  
+                  <div class="text-color-computed">Calculating...</div>  
+                </div>
+                <button class="button ">Button</button>
+              </div>
+              <h3 class="card-heading"><span>Background Surface</span><span>Text contrast</span></h3>
+              <div class="ratio">Calculating...</div>  
+            </div>
+            <article class="card-content bg-surface color-contrast">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of main and a text color of contrast</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
+          </div>
+          <!-- end card -->
+
+          <!-- card -->
+          <div class="card">
+            <div class="card-front element-ratio-calculating bg-surface">  
               <div class="card-header">
                 <div class="color-info">
                   <div class="bg-color-computed">Calculating...</div>  
@@ -122,12 +152,19 @@
               <h3 class="card-heading"><span>Background Surface</span><span>Text default</span></h3>
               <div class="ratio">Calculating...</div>  
             </div>
+            <article class="card-content bg-surface color-default">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of surface and a text color of default</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
           </div>
           <!-- end card -->
 
           <!-- card -->
           <div class="card">
-            <div class="card-container element-ratio-calculating color-heading bg-surface">
+            <div class="card-front element-ratio-calculating color-heading bg-surface">
               <div class="card-header">
                 <div class="color-info">
                   <div class="bg-color-computed">Calculating...</div>  
@@ -138,12 +175,19 @@
               <h3 class="card-heading"><span>Background Surface</span><span>Text heading</span></h3>
               <div class="ratio">Calculating...</div>  
             </div>
+            <article class="card-content bg-surface color-heading">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of surface and a text color of heading</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
           </div>
         <!-- end card -->
 
         <!-- card -->
         <div class="card">
-          <div class="card-container element-ratio-calculating color-heading bg-contrast ">
+          <div class="card-front element-ratio-calculating color-heading bg-contrast ">
             <div class="card-header">
               <div class="color-info">
                 <div class="bg-color-computed">Calculating...</div>  
@@ -154,12 +198,19 @@
             <h3 class="card-heading"><span>Background Contrast</span><span>Text heading</span></h3>
             <div class="ratio">Calculating...</div>  
           </div>
+          <article class="card-content bg-contrast color-heading">
+            <div class="card-content-container">
+              <h3>This is how your card content looks like</h3>
+              <p>this card has a background color of contrast and a text color of heading</p>
+              <button class="button">Button</button>
+            </div>
+          </article>
         </div>
         <!-- end card -->
 
         <!-- card -->
         <div class="card">
-          <div class="card-container element-ratio-calculating color-contrast-accent bg-default ">
+          <div class="card-front element-ratio-calculating color-contrast-accent bg-default ">
             <div class="card-header">
               <div class="color-info">
                 <div class="bg-color-computed">Calculating...</div>  
@@ -170,19 +221,28 @@
             <h3 class="card-heading"><span>Background Default</span><span>Text Contrast Accent</span></h3>
             <div class="ratio">Calculating...</div>  
           </div>
+          <article class="card-content bg-default color-contrast-accent">
+            <div class="card-content-container">
+              <h3>This is how your card content looks like</h3>
+              <p>this card has a background color of default and a text color of contrast accent</p>
+              <button class="button">Button</button>
+            </div>
+          </article>
         </div>
         <!-- end card -->
+
       </div>
     </div>
   </section>
 
-      <section class="section bg-surface">
-      <div class="container">
+  <section class="section bg-surface">
+    <div class="container">
       <h2 class="section-heading">Similar colors</h2>
+      <p>These similar colors can be used for shades or surfaces</p>
       <div class="card-listing">
                 <!-- card -->
                 <div class="card">
-                  <div class="card-container element-ratio-calculating  bg-accent-2 ">
+                  <div class="card-front element-ratio-calculating  bg-accent-2 color-contrast">
                     <div class="card-header">
                       <div class="color-info">
                         <div class="bg-color-computed">Calculating...</div>  
@@ -190,15 +250,22 @@
                       </div>
                     <button class="button ">Button</button>
                   </div>
-                    <h3 class="card-heading"><span>Background Accent 2</span><span>Text Contrast Accent</span></h3>
+                    <h3 class="card-heading"><span>Background Accent 2</span><span>Text Contrast</span></h3>
                     <div class="ratio">Calculating...</div>  
                   </div>
+                  <article class="card-content bg-accent-2 color-contrast">
+                    <div class="card-content-container">
+                      <h3>This is how your card content looks like</h3>
+                      <p>this card has a background color of accent 2 and a text color of contrast</p>
+                      <button class="button">Button</button>
+                    </div>  
+                  </article>
                 </div>
                 <!-- end card -->
         
                 <!-- card -->
                 <div class="card">
-                  <div class="card-container element-ratio-calculating  bg-accent-3 ">
+                  <div class="card-front element-ratio-calculating  bg-accent-3 color-contrast ">
                     <div class="card-header">
                       <div class="color-info">
                         <div class="bg-color-computed">Calculating...</div>  
@@ -206,15 +273,22 @@
                       </div>
                     <button class="button ">Button</button>
                   </div>
-                    <h3 class="card-heading"><span>Background Accent 3</span><span>Text Contrast Accent</span></h3>
+                    <h3 class="card-heading"><span>Background Accent 3</span><span>Text Contrast</span></h3>
                     <div class="ratio">Calculating...</div>  
                   </div>
-                </div>
+                  <article class="card-content bg-accent-3 color-contrast">
+                    <div class="card-content-container">
+                      <h3>This is how your card content looks like</h3>
+                      <p>this card has a background color of accent 3 and a text color of contrast</p>
+                      <button class="button">Button</button>
+                    </div>
+                  </article>
+                </div>  
                 <!-- end card -->
         
                 <!-- card -->
                 <div class="card">
-                  <div class="card-container element-ratio-calculating  bg-accent-4 ">
+                  <div class="card-front element-ratio-calculating  bg-accent-4 color-contrast ">
                     <div class="card-header">
                       <div class="color-info">
                         <div class="bg-color-computed">Calculating...</div>  
@@ -222,64 +296,90 @@
                       </div>
                     <button class="button ">Button</button>
                   </div>
-                    <h3 class="card-heading"><span>Background Accent 4</span><span>Text Contrast Accent</span></h3>
+                    <h3 class="card-heading"><span>Background Accent 4</span><span>Text Contrast</span></h3>
                     <div class="ratio">Calculating...</div>  
                   </div>
+                  <article class="card-content bg-accent-4 color-contrast">
+                    <div class="card-content-container">
+                      <h3>This is how your card content looks like</h3>
+                      <p>this card has a background color of accent 4 and a text color of contrast</p>
+                      <button class="button">Button</button>
+                    </div>
+                  </article>
                 </div>
                 <!-- end card -->
-                </div>
-                <div class="card-listing">
-                  <!-- card -->
-                  <div class="card">
-                    <div class="card-container element-ratio-calculating  bg-accent-2 color-heading">
-                      <div class="card-header">
-                        <div class="color-info">
-                          <div class="bg-color-computed">Calculating...</div>  
-                          <div class="text-color-computed">Calculating...</div>  
-                        </div>
-                      <button class="button ">Button</button>
-                    </div>
-                      <h3 class="card-heading"><span>Background Accent 2</span><span>Text heading</span></h3>
-                      <div class="ratio">Calculating...</div>  
-                    </div>
+            <!-- card -->
+            <div class="card">
+              <div class="card-front element-ratio-calculating  bg-accent-2 color-heading">
+                <div class="card-header">
+                  <div class="color-info">
+                    <div class="bg-color-computed">Calculating...</div>  
+                    <div class="text-color-computed">Calculating...</div>  
                   </div>
-                  <!-- end card -->
-          
-                  <!-- card -->
-                  <div class="card">
-                    <div class="card-container element-ratio-calculating  bg-accent-3 color-heading">
-                      <div class="card-header">
-                        <div class="color-info">
-                          <div class="bg-color-computed">Calculating...</div>  
-                          <div class="text-color-computed">Calculating...</div>  
-                        </div>
-                      <button class="button ">Button</button>
-                    </div>
-                      <h3 class="card-heading"><span>Background Accent 3</span><span>Text heading</span></h3>
-                      <div class="ratio">Calculating...</div>  
-                    </div>
-                  </div>
-                  <!-- end card -->
-          
-                  <!-- card -->
-                  <div class="card">
-                    <div class="card-container element-ratio-calculating  bg-accent-4 color-heading">
-                      <div class="card-header">
-                        <div class="color-info">
-                          <div class="bg-color-computed">Calculating...</div>  
-                          <div class="text-color-computed">Calculating...</div>  
-                        </div>
-                      <button class="button ">Button</button>
-                    </div>
-                      <h3 class="card-heading"><span>Background Accent 4</span><span>Text heading</span></h3>
-                      <div class="ratio">Calculating...</div>  
-                    </div>
-                  </div>
-                  <!-- end card -->
-                  </div>
+                <button class="button ">Button</button>
               </div>
+                <h3 class="card-heading"><span>Background Accent 2</span><span>Text heading</span></h3>
+                <div class="ratio">Calculating...</div>  
+              </div>
+              <article class="card-content bg-accent-2 color-heading">
+                <div class="card-content-container">
+                  <h3>This is how your card content looks like</h3>
+                  <p>this card has a background color of accent 2 and a text color of heading</p>
+                  <button class="button">Button</button>
+                </div>
+              </article>
             </div>
-      </section>
+            <!-- end card -->
+    
+            <!-- card -->
+            <div class="card">
+              <div class="card-front element-ratio-calculating  bg-accent-3 color-heading">
+                <div class="card-header">
+                  <div class="color-info">
+                    <div class="bg-color-computed">Calculating...</div>  
+                    <div class="text-color-computed">Calculating...</div>  
+                  </div>
+                <button class="button ">Button</button>
+              </div>
+                <h3 class="card-heading"><span>Background Accent 3</span><span>Text heading</span></h3>
+                <div class="ratio">Calculating...</div>  
+              </div>
+              <article class="card-content bg-accent-3 color-heading">
+                <div class="card-content-container">
+                  <h3>This is how your card content looks like</h3>
+                  <p>this card has a background color of accent 3 and a text color of heading</p>
+                  <button class="button">Button</button>
+                </div>
+              </article>
+            </div>
+            <!-- end card -->
+    
+            <!-- card -->
+            <div class="card">
+              <div class="card-front element-ratio-calculating  bg-accent-4 color-heading">
+                <div class="card-header">
+                  <div class="color-info">
+                    <div class="bg-color-computed">Calculating...</div>  
+                    <div class="text-color-computed">Calculating...</div>  
+                  </div>
+                <button class="button ">Button</button>
+              </div>
+                <h3 class="card-heading"><span>Background Accent 4</span><span>Text heading</span></h3>
+                <div class="ratio">Calculating...</div>  
+              </div>
+              <article class="card-content bg-accent-4 color-heading">
+                <div class="card-content-container">
+                  <h3>This is how your card content looks like</h3>
+                  <p>this card has a background color of accent 4 and a text color of heading</p>
+                  <button class="button">Button</button>
+                </div>
+              </article>
+            </div>
+            <!-- end card -->
+            </div>
+      </div>
+    </div>
+  </section>
 
     </main>
 

@@ -83,6 +83,9 @@ function getComputedColor(element, property) {
     return color;
 }
 
+// Variable pour suivre l'état du filtre
+let isFilterActive = false;
+
 // Fonction pour mettre à jour le ratio
 function updateContrastRatio() {
     const cards = document.querySelectorAll('.element-ratio-calculating');
@@ -90,12 +93,23 @@ function updateContrastRatio() {
         // Calculer le ratio une seule fois par carte
         const bg = getComputedColor(card, 'background-color');
         const color = getComputedColor(card, 'color');
-        const ratio = getContrastRatio(bg, color).toFixed(2);
+        const ratio = getContrastRatio(bg, color);
+        const ratioFormatted = ratio.toFixed(2);
     
         // Mettre à jour l'affichage
-        card.querySelector('.ratio').textContent = `${ratio}:1`;
+        card.querySelector('.ratio').textContent = `${ratioFormatted}:1`;
         card.querySelector('.bg-color-computed').textContent = bg;
         card.querySelector('.text-color-computed').textContent = color;
+
+        // Trouver la carte parente (.card) et la masquer si le filtre est actif et le ratio est inférieur à 4.5
+        const parentCard = card.closest('.card');
+        if (parentCard) {
+            if (isFilterActive && ratio < 4.5) {
+                parentCard.style.display = 'none';
+            } else {
+                parentCard.style.display = '';
+            }
+        }
     });
 }
 
@@ -198,3 +212,24 @@ document.getElementById('color-picker').addEventListener('input', function() {
 
 // Calculer le ratio initial
 document.addEventListener('DOMContentLoaded', updateAllCalculations);
+
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
+
+// Ajouter l'écouteur d'événements pour le bouton de filtre
+document.querySelector('.button__primary').addEventListener('click', () => {
+    isFilterActive = !isFilterActive;
+    updateContrastRatio();
+    
+    // Mettre à jour le texte du bouton
+    const button = document.querySelector('.button__primary');
+    if (isFilterActive) {
+        button.textContent = 'Show all cards';
+    } else {
+        button.textContent = 'Only keep card with a ratio of 4.5:1 or more';
+    }
+});
+
