@@ -233,3 +233,11 @@ document.querySelector('.button__primary').addEventListener('click', () => {
     }
 });
 
+
+// event on the pourcentage input to calculate the ratio of the cards
+document.getElementById('pourcentage-input').addEventListener('input', function() {
+  const pourcentage = this.value;
+  document.documentElement.style.setProperty('--pourcentage', `${pourcentage}%`);
+  document.documentElement.style.setProperty('--pourcentage-2', `${pourcentage / 2}%`);
+  updateAllCalculations();
+});
