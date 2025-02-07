@@ -1,11 +1,9 @@
 /*
 plan on :
-find aunique pourcentage for each root color base on the original color but a dding a pourcentage of accent color to the original color
-Make 3 surface that take the background color and add 20% of the accent color to the background color recursively.
-lower the cards height to see more card at once.
-Make sections to see the card in good height row1  col 3 .
-test the similar algorithm, check webglot.com
-
+make the current cssmore efficent by createding class adapted to each card with a ratio of 4.5:1 or more
+add the grid layout functionnality of https://jonyablonski.com/ use his container breakpoints.
+make a section for letter spacing b sed on the font selected . the calcul of the etter spacing is based o, https://www.youtube.com/watch?v=EFZU3SA6GZ0 video.
+when lowercas needs negative spacing .06em , when uppercase needs positive spacing.2em.
 */
 
 :root {
@@ -20,6 +18,7 @@ test the similar algorithm, check webglot.com
   --box-shadow: 2px 2px 2px 0 var(--heading-color);
   --pourcentage: 40%;
   --pourcentage-2: calc(var(--pourcentage) / 1.5);
+  --border-radius: 5px;
 }
 
 @media (max-width: 572px) {
@@ -31,31 +30,42 @@ test the similar algorithm, check webglot.com
 :root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #040b14; /* Default color used for the majority of the text content across the entire website */
+  --contrast-color: #f4fafd; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+
+  --surface-color: color-mix(in srgb, var(--background-color), var(--accent-color) var(--pourcentage)); /*shade of the accent color for the background of the website */
+  --surface-color-2: color-mix(in srgb, var(--background-color), var(--accent-color) calc(var(--pourcentage) / 2)); /*shade of the similar accent color for the background of the website */
+  
   --heading-color: color-mix(in srgb, var(--default-color), var(--accent-color) var(--pourcentage)); /* Color for headings, subheadings and title throughout the website */
   --accent-color: #473ae0; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: color-mix(in srgb, var(--background-color), var(--accent-color) var(--pourcentage)); /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #f4fafd; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  
   --border-color: var(--heading-color); /* Border color for elements that require a border */
-  --button-color: #f4fafd;
-  --contrast-accent: color-mix(in srgb, var(--contrast-color), var(--accent-color) var(--pourcentage));
-  --accent-color-surface-4: color-mix(in srgb, var(--default-color), var(--accent-color-4) var(--pourcentage));
+
+  --contrast-accent: color-mix(in srgb, var(--contrast-color), var(--accent-color) var(--pourcentage));/* Color for contrast accent throughout the website */
+
+  --accent-4-surface-color: color-mix(in srgb, var(--default-color), var(--accent-color-4) var(--pourcentage-2));
 }
 
 .dark-theme {
-  --background-color: #040b14;
+  --background-color: #000000;
   --default-color: #f4fafd;
-  --heading-color: color-mix(in srgb, var(--default-color), var(--accent-color) var(--pourcentage));
-  --surface-color: color-mix(in srgb, var(--background-color), var(--accent-color) var(--pourcentage)); 
   --contrast-color: #040b14;
-  --border-color: var(--surface-color);/* Border color for elements that require a border */
+
+  --surface-color: color-mix(in srgb, var(--background-color), var(--accent-color) var(--pourcentage)); 
+  --surface-color-2: color-mix(in srgb, var(--background-color), var(--accent-color) calc(var(--pourcentage) / 2)); /*shade of the similar accent color for the background of the website */
+
+  --heading-color: color-mix(in srgb, var(--default-color), var(--accent-color) var(--pourcentage));
+  
+  --border-color: var(--surface-color);
+
   --contrast-accent: color-mix(in srgb, var(--contrast-color), var(--accent-color) var(--pourcentage));
+
+  --accent-4-surface-color: color-mix(in srgb, var(--default-color), var(--accent-color-4) var(--pourcentage-2));
+
   --box-shadow: 2px 2px 2px 0px var(--surface-color);
-  --accent-color-surface-4: color-mix(in srgb, var(--default-color), var(--accent-color-4) var(--pourcentage-2));
 }
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
-
 a {
   text-decoration: inherit;
 }
@@ -68,16 +78,28 @@ p {
   margin-top: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  letter-spacing: -0.01em;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* Styles pour les icônes de thème */
@@ -140,16 +162,16 @@ h6 {
 }
 
 .button {
-  border: none;
   padding: .3em .5em;
   font-weight: bold;
   font-size: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+
   box-shadow: var(--box-shadow);
   background-color: inherit;
   color: inherit;
   border: 1px solid var(--border-color);
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .button__primary {
@@ -158,10 +180,22 @@ h6 {
   border: 2px solid var(--border-color);
 }
 
+.button:hover {
+  box-shadow: 0 0 4px 0 var(--accent-color);
+}
+
+ .dark-theme .button:hover {
+  box-shadow: 0 0 10px 0 var(--accent-color);
+}
+
 .dark-theme .button__primary {
   background-color: inherit;
   color: var(--default-color);
   border: 2px solid var(--default-color);
+}
+
+.dark-theme .bg-surface .button {
+  box-shadow: 1px 1px 1px 0px var(--contrast-color);
 }
 
 .dark-theme .section .bg-surface .button {
@@ -176,40 +210,6 @@ h6 {
   border: 2px solid var(--contrast-color);
 }
 
-.bg-main {
-  background-color: var(--accent-color);
-}
-
-.bg-surface {
-  background-color: var(--surface-color);
-}
-
-.bg-default {
-  background-color: var(--default-color);
-}
-
-.bg-contrast {
-  background-color: var(--contrast-color);
-}
-
-.bg-accent-2 {
-  background-color: var(--accent-color-2);
-}
-
-.bg-accent-3 {
-  background-color: var(--accent-color-3);
-}
-
-.bg-accent-4 {
-  background-color: var(--accent-color-4);
-}
-
-.dark-theme [class*="bg-accent-"] .button{
-  border: 2px solid inherit;
-  box-shadow: 2px 2px 2px 0px inherit;  
-}
-
-
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -223,7 +223,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--background-color);
+  background-color: var(--contrast-color);
 }
 
 header .container {
@@ -232,11 +232,44 @@ header .container {
   align-items: center;
 }
 
-header .logo {
-  color: var(--heading-color);
-  font-size: 1.8rem;
-  font-weight: bold;
+@media (max-width: 572px) {
+  header .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
 }
+
+header .logo {
+  color: transparent;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+}
+
+div:has(> .rainbow-text){
+  background: linear-gradient(
+    to right,
+    var(--accent-color) 0%,
+    var(--accent-color) 40%,
+    var(--accent-color) 60%,
+    var(--accent-color-2) 70%,
+    var(--accent-color-3) 90%,
+    var(--accent-color-4) 100%
+  );
+  background-size: 300% auto;
+  background-position: 150% center;
+  transition: background-position .5s ease-in-out;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+}
+
+div:has(> .rainbow-text):hover {
+  background-position: 100% center;
+}
+
+
 
 header input {
 	background-color: var(--contrast-color);
@@ -247,6 +280,10 @@ header input {
 
 header input:focus-visible {
   box-shadow: var(--box-shadow);
+}
+
+header input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent-color);
 }
 
 header input:hover {
@@ -271,14 +308,14 @@ header input[type="color"]::-webkit-color-swatch-wrapper {
 
 header input[type="color"]::-webkit-color-swatch {
   border: 2px solid var(--border-color);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   padding: 0;
 
 }
 
 header input[type="color"]::-moz-color-swatch {
   border: 2px solid var(--border-color);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 
 header input[type="color"]:hover {
@@ -296,13 +333,14 @@ header input[type="range"] {
 header input[type="range"]::-webkit-slider-runnable-track {
   background: var(--surface-color);
   height: 0.5rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+  margin: .25em 0;
 }
 
 header input[type="range"]::-moz-range-track {
   background: var(--surface-color);
   height: 0.5rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 
 header input[type="range"]::-webkit-slider-thumb {
@@ -332,9 +370,17 @@ header input[type="range"]:focus::-webkit-slider-thumb {
               0 0 0 6px var(--accent-color);
 }
 
-header input[type="range"]:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 3px var(--background-color),
-              0 0 0 6px var(--accent-color);
+#calculate-button:hover{
+  cursor: pointer;
+}
+
+#pourcentage-input:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+#color-picker[type="text"] {
+  background-color: var(--accent-color);
 }
 
 /* Style pour le label du range */
@@ -400,7 +446,7 @@ header .github-link svg {
 }
 
 .card {
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   perspective: 1000px;
   -webkit-perspective: 1000px;
   cursor: pointer;
@@ -412,6 +458,18 @@ header .github-link svg {
     width: 100%;
   }
 }
+
+/* allow this rules when the button enhenced is active */
+.card:focus-within {
+  outline: 4px solid blue;
+  outline-offset: 4px;
+  padding: .3em;
+}   
+
+.card:focus-within .card-content {
+  inset: 5px 5px 5px 5px;
+}
+
 
 .card-heading, .ratio, .card-content h3 {
   font-size: 1.4rem;
@@ -446,7 +504,7 @@ header .github-link svg {
   -webkit-transition: transform 0.6s ease-in-out;
   height: 300px;
   padding: 0 1em;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
 }
@@ -456,11 +514,16 @@ header .github-link svg {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  z-index: 2;
-  position: relative;
-  transition: opacity 0.4s ease-in-out;
-  -webkit-transition: opacity 0.4s ease-in-out;
-  opacity: 1;
+  transition: transform 0.6s ease-in-out;
+  -webkit-transition: transform 0.6s ease-in-out;
+}
+
+.card-front:hover, .card-content:hover{
+  box-shadow: 1px 1px 1px 2px var(--accent-4-surface-color);
+}
+
+.dark-theme .card-front:hover, .dark-theme .card-content:hover{
+  box-shadow: 1px 1px 5px 1px var(--accent-4-surface-color);
 }
 
 .card-content {
@@ -483,13 +546,21 @@ header .github-link svg {
   height: 100%;
 }
 
-.no-motion .card-front {
-  z-index: 2;
-}
-
 .flipped .card-content {
   transform: rotateY(360deg);
   -webkit-transform: rotateY(360deg);
+}
+
+.flipped .card-front {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.no-motion .card-front {
+  z-index: 2;
+  position: relative;
+  transition: opacity 0.4s ease-in-out;
+  -webkit-transition: opacity 0.4s ease-in-out;
 }
 
 .no-motion .card-content {
@@ -499,13 +570,46 @@ header .github-link svg {
 
 .no-motion .flipped .card-front {
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  -webkit-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
 }
 
+.bg-main {
+  background-color: var(--accent-color);
+}
 
+.bg-surface {
+  background-color: var(--surface-color);
+}
 
+.bg-surface-2 {
+  background-color: var(--surface-color-2);
+}
 
+.bg-default {
+  background-color: var(--default-color);
+}
+
+.bg-contrast {
+  background-color: var(--contrast-color);
+}
+
+.bg-accent-2 {
+  background-color: var(--accent-color-2);
+}
+
+.bg-accent-3 {
+  background-color: var(--accent-color-3);
+}
+
+.bg-accent-4 {
+  background-color: var(--accent-color-4);
+}
+
+.section-bg-surface{
+  background-color: var(--surface-color);
+}
 
 .color-heading {
   color: var(--heading-color);
@@ -527,47 +631,15 @@ header .github-link svg {
   color: var(--contrast-accent);
 }
 
-
-
-.button:hover {
-  box-shadow: 0 0 4px 0 var(--accent-color);
-}
-
- .dark-theme .button:hover {
-  box-shadow: 0 0 10px 0 var(--accent-color);
-}
-
-.card-front:hover, .card-content:hover{
-  box-shadow: 1px 1px 1px 2px var(--accent-color-surface-4);
-}
-
-.dark-theme .card-front:hover, .dark-theme .card-content:hover{
-  box-shadow: 1px 1px 5px 1px var(--accent-color-surface-4);
-}
-
-.card:focus-within {
-  border: 4px solid color-mix(in srgb, var(--accent-color-surface-4), var(--accent-color) 40%);
-}       
-
-.dark-theme .card:focus-within {
-  border: 4px solid color-mix(in srgb, var(--accent-color-surface-4), var(--accent-color) 40%);
-}
-
-
 footer {
-  text-align: center;
-  padding: 1em 0;
   border-top: 1px solid var(--border-color);
   background-color: var(--contrast-color);
   color: var(--heading-color);
   font-size: 1rem;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   font-family: var(--heading-font);
   text-align: center;
   padding: 2em 0;
-  border-top: 1px solid var(--border-color);
 }
 
 footer a {
@@ -583,21 +655,6 @@ footer p {
   margin: 0;
 }
 
-
-/*Make a the hidden card buttons hightlight when the card is flipped for the keyboard and give the buttons a position relative to be z-indexed over the visible card buttons*/
-.card-front button {
-  position: relative;
-  z-index: 1;
-}
-
-.card-content button {
-  position: relative;
-  z-index: 1;
-}
-
-.card-content button:focus-visible {
-  box-shadow: 0 0 4px 0 var(--accent-color);
-}
 
 #preloader {
   position: fixed;
@@ -627,10 +684,6 @@ footer p {
   border-top-color: var(--accent-color);
   border-radius: 50%;
   animation: loading 0.75s ease infinite;
-}
-
-#calculate-button:hover{
-  cursor: pointer;
 }
 
 @keyframes loading {

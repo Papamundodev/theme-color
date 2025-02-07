@@ -4,23 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="rgb(255, 255, 255)" />
+    <meta name="theme-color" content="#473ae0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#473ae0" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
     <title>Vite App</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body class="no-motion">
+  <body class="">
     <header>
       <div class="container">
-        <div class="logo">Theme Color</div>
+        <div>
+          <div class="logo rainbow-text text-uppercase">Theme Color</div>
+        </div>
         <nav class="nav">
           <ul>
             
             <!-- pourcentage input to change the color of the theme -->
-            <label for="pourcentage-input">Pourcentage</label>
+            <label id="pourcentage-selected" for="pourcentage-input">40%</label>
             <input type="range" id="pourcentage-input" min="0" max="100" value="40" step="1">
+
             <input type="color" id="color-picker" value="#473ae0">
             <!-- button to toggle theme dark/light-->
             <button id="theme-toggle" class="theme-toggle-button">
@@ -89,7 +94,7 @@
             </div>
             <article class="card-content bg-main color-default">
               <div class="card-content-container">
-                <h3>This is how your card content looks like</h3>
+                <h3 class="">This is how your card content looks like</h3>
                 <p>this card has a background color of main and a text color of default</p>
                 <button class="button">Button</button>
               </div>
@@ -158,7 +163,7 @@
             </div>
             <article class="card-content bg-surface color-default">
               <div class="card-content-container">
-                <h3>This is how your card content looks like</h3>
+                <h3 class="">This is how your card content looks like</h3>
                 <p>this card has a background color of surface and a text color of default</p>
                 <button class="button">Button</button>
               </div>
@@ -183,6 +188,29 @@
               <div class="card-content-container">
                 <h3>This is how your card content looks like</h3>
                 <p>this card has a background color of surface and a text color of heading</p>
+                <button class="button">Button</button>
+              </div>
+            </article>
+          </div>
+        <!-- end card -->
+
+          <!-- card -->
+          <div class="card">
+            <div class="card-front element-ratio-calculating color-heading bg-surface-2">
+              <div class="card-header">
+                <div class="color-info">
+                  <div class="bg-color-computed">Calculating...</div>  
+                  <div class="text-color-computed">Calculating...</div>  
+                </div>
+                <button class="button ">Button</button>
+              </div>
+              <h3 class="card-heading"><span>Background Surface 2</span><span>Text heading</span></h3>
+              <div class="ratio">Calculating...</div>  
+            </div>
+            <article class="card-content bg-surface-2 color-heading">
+              <div class="card-content-container">
+                <h3>This is how your card content looks like</h3>
+                <p>this card has a background color of surface 2 and a text color of heading</p>
                 <button class="button">Button</button>
               </div>
             </article>
@@ -239,7 +267,7 @@
     </div>
   </section>
 
-  <section class="section bg-surface">
+  <section class="section section-bg-surface">
     <div class="container">
       <h2 class="section-heading">Similar colors</h2>
       <p>These similar colors can be used for shades or surfaces</p>
@@ -314,7 +342,7 @@
                 <!-- end card -->
             <!-- card -->
             <div class="card">
-              <div class="card-front element-ratio-calculating  bg-accent-2 color-heading">
+              <div class="card-front element-ratio-calculating  bg-accent-2 color-default">
                 <div class="card-header">
                   <div class="color-info">
                     <div class="bg-color-computed">Calculating...</div>  
@@ -322,13 +350,13 @@
                   </div>
                 <button class="button ">Button</button>
               </div>
-                <h3 class="card-heading"><span>Background Accent 2</span><span>Text heading</span></h3>
+                <h3 class="card-heading"><span>Background Accent 2</span><span>Text default</span></h3>
                 <div class="ratio">Calculating...</div>  
               </div>
-              <article class="card-content bg-accent-2 color-heading">
+              <article class="card-content bg-accent-2 color-default">
                 <div class="card-content-container">
                   <h3>This is how your card content looks like</h3>
-                  <p>this card has a background color of accent 2 and a text color of heading</p>
+                  <p>this card has a background color of accent 2 and a text color of default</p>
                   <button class="button">Button</button>
                 </div>
               </article>
@@ -337,7 +365,7 @@
     
             <!-- card -->
             <div class="card">
-              <div class="card-front element-ratio-calculating  bg-accent-3 color-heading">
+              <div class="card-front element-ratio-calculating  bg-accent-3 color-default">
                 <div class="card-header">
                   <div class="color-info">
                     <div class="bg-color-computed">Calculating...</div>  
@@ -345,13 +373,13 @@
                   </div>
                 <button class="button ">Button</button>
               </div>
-                <h3 class="card-heading"><span>Background Accent 3</span><span>Text heading</span></h3>
+                <h3 class="card-heading"><span>Background Accent 3</span><span>Text default</span></h3>
                 <div class="ratio">Calculating...</div>  
               </div>
-              <article class="card-content bg-accent-3 color-heading">
+              <article class="card-content bg-accent-3 color-default">
                 <div class="card-content-container">
                   <h3>This is how your card content looks like</h3>
-                  <p>this card has a background color of accent 3 and a text color of heading</p>
+                  <p>this card has a background color of accent 3 and a text color of default</p>
                   <button class="button">Button</button>
                 </div>
               </article>
@@ -360,7 +388,7 @@
     
             <!-- card -->
             <div class="card">
-              <div class="card-front element-ratio-calculating  bg-accent-4 color-heading">
+              <div class="card-front element-ratio-calculating  bg-accent-4 color-default">
                 <div class="card-header">
                   <div class="color-info">
                     <div class="bg-color-computed">Calculating...</div>  
@@ -368,18 +396,20 @@
                   </div>
                 <button class="button ">Button</button>
               </div>
-                <h3 class="card-heading"><span>Background Accent 4</span><span>Text heading</span></h3>
+                <h3 class="card-heading"><span>Background Accent 4</span><span>Text default</span></h3>
                 <div class="ratio">Calculating...</div>  
               </div>
-              <article class="card-content bg-accent-4 color-heading">
+              <article class="card-content bg-accent-4 color-default">
                 <div class="card-content-container">
                   <h3>This is how your card content looks like</h3>
-                  <p>this card has a background color of accent 4 and a text color of heading</p>
-                  <button class="button">Button</button>
+                  <p>this card has a background color of accent 4 and a text color of default</p>
+                  <button inert class="button">Button</button>
                 </div>
               </article>
             </div>
             <!-- end card -->
+
+            
             </div>
       </div>
     </div>
@@ -388,7 +418,7 @@
     </main>
 
     <footer>
-      <p>Made with ❤️ by <a href="https://github.com/Papamundodev">Papamundodev</a></p>
+      <p class="text-uppercase">Made with ❤️ by <a href="https://github.com/Papamundodev">Papamundodev</a></p>
     </footer>
 
     <div id="preloader"></div>
