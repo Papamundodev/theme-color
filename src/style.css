@@ -320,6 +320,8 @@ header input[type="color"]::-moz-color-swatch {
 
 header input[type="color"]:hover {
   transform: scale(1.1);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 header input[type="range"] {
@@ -406,7 +408,6 @@ header .theme-toggle-button {
   border: none;
   cursor: pointer;
   display: flex;
-
 }
 
 header .github-link {
@@ -420,6 +421,11 @@ header .github-link svg {
   fill: var(--accent-color);
   width: 100%;
   height: 100%;
+}
+
+header .theme-toggle-button:hover, header .github-link:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .section {
@@ -460,13 +466,13 @@ header .github-link svg {
 }
 
 /* allow this rules when the button enhenced is active */
-.card:focus-within {
+.no-motion .card:focus-within {
   outline: 4px solid blue;
   outline-offset: 4px;
   padding: .3em;
 }   
 
-.card:focus-within .card-content {
+.no-motion .card:focus-within .card-content {
   inset: 5px 5px 5px 5px;
 }
 
